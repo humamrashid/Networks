@@ -1,14 +1,14 @@
 # Humam Rashid
 # CISC 7334X, Prof. Chen
 
-# Web Client Program using python.
+# Web client program using python.
 
 from http import client as httpclient
 
 def main():
-    conn = httpclient.HTTPConnection('127.0.0.1:5000')
+    conn = httpclient.HTTPConnection('192.168.1.41:5000')
 
-    conn.request('GET', '/')
+    conn.request('GET', '/helloworld')
     response = conn.getresponse()
     print(response.status, response.reason)
 
