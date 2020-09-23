@@ -32,12 +32,18 @@ def mc_send_file(hostip, mcgrpip, mcport, filename):
     sender.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 1)
     
     # 4. Set up transmitting NIC for multicast datagrams
-    #
+
+    sender.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_IF, \
+            socket.inet_aton(hostip))
+
     # 5. Transmit the filename in a datagram
     #
     # 6. Read the file and the transmit the file content in a datagram
     # 
     # 7. release the socket resources
+
+    sender.close()
+
     print('Completed')
 
 def mc_send_msg(hostip, mcgrpip, mcport, msgbuf):

@@ -18,18 +18,33 @@ def write_file(filename, buf):
 
 def mc_recv_file(fromnicip, mcgrpip, mcport):
     # 1. create a UDP socket
-    #
+
+    receiver = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM, \
+            proto=socket.IPPROTO_UDP, fileno=None)
+    
     # 2. configure the socket to receive datagrams sent to the desired 
     #    multicast end point 
-    #
+
+    bindaddr = (mcgrpip, mcport)
+    receiver.bind(bindaddr)
+    
     # 3. join a NIC to the intended multicast group
-    #
+
+    if fromnicip == '0.0.0.0':
+        mreq = struct.pack("=4sl", socket.inet_aton(mcgrpip), socket.INADDR_ANY)
+    else:
+        mreq = struct.pack("=4s4s", \
+                socket.inet_aton(mcgrpip), socket.inet_aton(fromnicip))
+    receiver.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
+    
     # 4. Receive the filename
     #
     # 5. Receive file content of the file and write it to file
     #
     # 6. Release socket resources
-    #
+
+    receiver.close()
+
     print('Completed')
 
 def mc_recv_msg(fromnicip, mcgrpip, mcport):
