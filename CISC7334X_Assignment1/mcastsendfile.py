@@ -19,32 +19,22 @@ def read_file(filename):
 
 def mc_send_file(hostip, mcgrpip, mcport, filename):
     # 1. creates a UDP socket
-
     sender = socket.socket(family=socket.AF_INET, type=socket.SOCK_DGRAM, \
-            proto=socket.IPPROTO_UDPm fileno=None)
-
+            proto=socket.IPPROTO_UDP, fileno=None)
     # 2. Defines a multicast end point
-
     mcgrp = (mcgrpip, mcport)
-
     # 3. Set up IP_MULTICAST_TTL
-
     sender.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 1)
-    
     # 4. Set up transmitting NIC for multicast datagrams
-
     sender.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_IF, \
             socket.inet_aton(hostip))
-
     # 5. Transmit the filename in a datagram
-    #
+    mc_send_msg(hostip, mcgrpip, mcport + 1, filename.encode())
     # 6. Read the file and the transmit the file content in a datagram
-    # 
+    sender.sendto(read_file(filename), mcgrp)
     # 7. release the socket resources
-
     sender.close()
-
-    print('Completed')
+    print(f'Completed: sent {filename}')
 
 def mc_send_msg(hostip, mcgrpip, mcport, msgbuf):
     # This creates a UDP socket
