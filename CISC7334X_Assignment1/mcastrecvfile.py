@@ -34,7 +34,7 @@ def mc_recv_file(fromnicip, mcgrpip, mcport):
     # 4. Receive the filename
     filename = mc_recv_msg(fromnicip, mcgrpip, mcport + 1)
     # 5. Receive file content of the file and write it to file
-    (buf, _) = receiver.recvfrom(1024)
+    (buf, _) = receiver.recvfrom(BUFSIZE)
     write_file(filename, buf)
     # 6. Release socket resources
     receiver.close()
@@ -73,7 +73,7 @@ def mc_recv_msg(fromnicip, mcgrpip, mcport):
     # receiver.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
     # Receive the mssage
-    buf, senderaddr = receiver.recvfrom(1024)
+    buf, senderaddr = receiver.recvfrom(BUFSIZE)
     msg = buf.decode()
 
     return msg
