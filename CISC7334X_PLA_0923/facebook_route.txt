@@ -1,0 +1,12 @@
+Traceroute to www.facebook.com at 157.240.0.35:
+ 1 hop  away from 192.168.1.1     [ICMP msg type 11]
+ 2 hops away from 10.240.162.57   [ICMP msg type 11]
+ 3 hops away from 67.59.229.6     [ICMP msg type 11]
+ 4 hops away from 167.206.32.126  [ICMP msg type 11]
+ 5 hops away from 65.19.100.2     [ICMP msg type 11]
+ 6 hops away from 64.15.0.196     [ICMP msg type 11]
+ 7 hops away from 103.4.96.200    [ICMP msg type 11]
+ 8 hops away from 31.13.25.179    [ICMP msg type 11]
+ 9 hops away from 157.240.39.143  [ICMP msg type 11]
+10 hops away from 157.240.0.35    [ICMP msg type  0]
+Desitnation reached
